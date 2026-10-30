@@ -31,7 +31,9 @@ class Thumbnailer():
         else:
             try:
                 img = PIL.Image.open(path)
-            except (PIL.UnidentifiedImageError, FileNotFoundError) as e:
+            except PIL.UnidentifiedImageError:
+                img = self.svg_to_image(path)
+            except FileNotFoundError as e:
                 print("xapp-thumbnails PIL load error: ", e)
 
         if img:
